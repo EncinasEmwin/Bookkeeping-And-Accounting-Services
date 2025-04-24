@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.A.S - Services</title>
+    <link rel="stylesheet" href="styles.css">
+
+</head>
+<body>
+    <header>
+        <div class="logo">B.A.S</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="customer_services.html">Services</a></li>
+                <li><a href="customer_payedservices.html">Payed Services</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="services">
+            <h1>Our Services</h1>
+            <div class="service-grid">
+                <div class="service-item" onclick="toggleService(this)">
+                  <img src="fin-0rHxkbcvQAE-unsplash.jpg" alt="Tax Preparation" />
+                  <p>Tax Preparation</p>
+                </div>
+                <div class="service-item" onclick="toggleService(this)">
+                  <img src="markus-spiske-XrIfY_4cK1w-unsplash.jpg" alt="Financial Reports" />
+                  <p>Financial Reports</p>
+                </div>
+                <div class="service-item" onclick="toggleService(this)">
+                  <img src="towfiqu-barbhuiya-M8z2SwSwpbg-unsplash.jpg" alt="Payroll Management" />
+                  <p>Payroll Management</p>
+                </div>
+                <div class="service-item" onclick="toggleService(this)">
+                  <img src="calculator-1156121_1280.jpg" alt="Expense Tracking" />
+                  <p>Expense Tracking</p>
+                </div>
+              </div>
+
+            <div style="margin-top: 20px;">
+                <input type="text" id="customerName" placeholder="Enter your name" required/>
+                <button onclick="submitSelection()">Proceed to Payed Services</button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        let selectedServices = [];
+
+        function toggleService(element) {
+            const service = element.textContent;
+            element.classList.toggle("selected");
+
+            if (selectedServices.includes(service)) {
+                selectedServices = selectedServices.filter(s => s !== service);
+            } else {
+                selectedServices.push(service);
+            }
+        }
+
+        function submitSelection() {
+            const name = document.getElementById("customerName").value.trim();
+            if (!name) {
+                alert("Please enter your name.");
+                return;
+            }
+            localStorage.setItem("selectedServices", JSON.stringify(selectedServices));
+            localStorage.setItem("customerName", name);
+            window.location.href = "customer_payedservices.html";
+        }
+    </script>
+</body>
+</html>

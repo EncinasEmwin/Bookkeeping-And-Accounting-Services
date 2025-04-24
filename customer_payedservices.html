@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>B.A.S - Payed Services</title>
+  <link rel="stylesheet" href="styles.css" />
+  <style>
+    .card {
+      background-color: white;
+      max-width: 500px;
+      margin: 30px auto;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .card h2 {
+      margin-bottom: 10px;
+      color: #2c3e50;
+    }
+
+    .service-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .service-list li {
+      background: #e0f7e9;
+      margin: 8px 0;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .btn {
+      background-color: #2e7d32;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .btn:hover {
+      background-color: #256329;
+    }
+
+    .thank-you {
+      text-align: center;
+      font-size: 1.4em;
+      color: #2e7d32;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">B.A.S</div>
+    <nav>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="customer_services.html">Services</a></li>
+        <li><a href="customer_payedservices.html">Payed Services</a></li>
+        <li><a href="dashboard.html">Dashboard</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <div id="content">
+      <div class="card">
+        <h2>Payed Services</h2>
+        <p id="greeting"></p>
+        <ul id="selectedList" class="service-list"></ul>
+        <button class="btn" onclick="showThankYou()">Proceed to Payment</button>
+      </div>
+    </div>
+
+    <div id="thankYouMsg" class="thank-you" style="display: none;">
+      <p>🎉 Thank you for availing our services! We’ll reach out to you shortly.</p>
+    </div>
+  </main>
+
+  <script>
+    const name = localStorage.getItem("customerName");
+    const services = JSON.parse(localStorage.getItem("selectedServices") || "[]");
+
+    document.getElementById("greeting").textContent = `Thank you, ${name}, for choosing our services!`;
+
+    const list = document.getElementById("selectedList");
+    services.forEach(service => {
+      const li = document.createElement("li");
+      li.textContent = service;
+      list.appendChild(li);
+    });
+
+    function showThankYou() {
+      document.getElementById("content").style.display = "none";
+      document.getElementById("thankYouMsg").style.display = "block";
+    }
+  </script>
+</body>
+</html>
